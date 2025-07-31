@@ -19,11 +19,12 @@
 #' @return A GRanges object containing fragments from the input .bam file. 
 #' 
 #' @import parallel
-#' @import Rsamtools
+#' @import IRanges
+#' @import Seqinfo
+#' @import GenomeInfoDb
 #' @import GenomicRanges
 #' @import GenomicAlignments
-#' @import IRanges
-#' @import GenomeInfoDb
+#' @import Rsamtools
 #' @export
 #' 
 #' @examples
@@ -107,15 +108,15 @@ importPEBamFiles <- function(
         # Add genome infos
         if (!is.null(genome)) {
             x <- GenomeInfoDb::keepStandardChromosomes(
-                GenomeInfoDb::Seqinfo(genome = genome), 
+                Seqinfo::Seqinfo(genome = genome),
                 pruning.mode = 'coarse'
             )
             g2 <- GenomeInfoDb::keepStandardChromosomes(
                 g, pruning.mode = 'coarse'
             )
             g2 <- sort(g2)
-            GenomeInfoDb::seqlevels(g2) <- GenomeInfoDb::seqlevels(x)
-            GenomeInfoDb::seqinfo(g2) <- x
+            Seqinfo::seqlevels(g2) <- Seqinfo::seqlevels(x)
+            Seqinfo::seqinfo(g2) <- x
             g <- sort(g2)
         }
         # Return GRanges

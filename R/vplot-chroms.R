@@ -112,7 +112,7 @@ plotProfile <- function(
     )
     p <- p + ggplot2::labs(
         x = paste0(
-            "Coordinates (", as.character(GenomeInfoDb::seqnames(loc)), ")"
+            "Coordinates (", as.character(Seqinfo::seqnames(loc)), ")"
         ), 
         y = "Fragment sizes", 
         title = loc

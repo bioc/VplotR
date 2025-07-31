@@ -17,6 +17,7 @@
 #' 
 #' @import parallel
 #' @import IRanges
+#' @import Seqinfo
 #' @import GenomicRanges
 #' @importFrom magrittr `%>%`
 #' @importFrom zoo rollmean
@@ -47,7 +48,7 @@ getFragmentsDistribution <- function(
     `%>%` <- magrittr::`%>%` 
     if (is.null(granges_list)) {
         granges_list <- GenomicRanges::GRanges(
-            GenomeInfoDb::seqinfo(fragments)
+            Seqinfo::seqinfo(fragments)
         )
     }
     if (methods::is(granges_list, 'GRanges')) {

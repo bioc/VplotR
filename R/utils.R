@@ -150,9 +150,10 @@ sampleGRanges <- function(
 #' @return A GRanges object of length n
 #' 
 #' @importFrom methods as
-#' @import GenomicRanges
 #' @import IRanges
+#' @import Seqinfo
 #' @import GenomeInfoDb
+#' @import GenomicRanges
 #' @export
 #' 
 #' @examples
@@ -242,9 +243,9 @@ sampleGRanges.GRanges <- function(
                 chrs, 
                 IRanges::IRanges(pos, width = widths),
                 strand = strands, 
-                seqinfo = GenomeInfoDb::seqinfo(granges)
+                seqinfo = Seqinfo::seqinfo(granges)
             )
-            GenomeInfoDb::seqlengths(g2) <- lengths(maxed_granges)
+            Seqinfo::seqlengths(g2) <- lengths(maxed_granges)
         })
         if (avoid_overlap) {
             g2 <- reduce(g2)
